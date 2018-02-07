@@ -16,6 +16,7 @@ std::vector<Flight> readFlights(std::string fileName);
 
 int main()
 {
+  Flight testFlight; 
   /*
     first read flights in files using readFlights()
     descen10.csv	ascen10.csv     rand10.csv
