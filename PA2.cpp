@@ -9,14 +9,22 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
-
+#include <string>
 #include "sort.h"
 
 std::vector<Flight> readFlights(std::string fileName);
+using namespace std;
 
 int main()
 {
   Flight testFlight; 
+  string file = "ascen10.csv";
+  vector<Flight> flights;
+  flights = readFlights(file);
+  cout << "read file..." << endl;
+  for (int i = 0; i < flights.size(); ++i) {
+    cout << flights.at(i) << endl;
+  }
   /*
     first read flights in files using readFlights()
     descen10.csv	ascen10.csv     rand10.csv
@@ -58,10 +66,64 @@ int main()
   return 0;
 }
 
+string& removeDelim (string& str, char delim) {
+  for (int i = 0; i < str.length(); ++i) {
+    if (str.at(i) == delim) {
+      str.at(i) = ' ';
+    }
+    else {
+      // do nothing
+    }
+  }
+  return str;
+}
+
+
 //read in the flights from the input file at fileName and store them in a vector
 std::vector<Flight> readFlights(std::string fileName)
 {
   std::vector<Flight> flights;
+  // reads file
+  ifstream is;
+  is.open(fileName);
+  if (!is) {
+    cout << "could not read file\n";
+  }
+  else {
+    cout << "reading file\n";
+  }
+
+  // temporary variables
+  string tFN = "";
+  string tD = "";
+  string tDT = "";
+  string tGN = "";
+  string info = "";
+  string nocommas = "";
+  string header = "";
+
+  char delim = ',';
+  getline (is, header);
+
+
+  // debug 
+  cout << "header: " << header << endl;
+
+  while (!is.eof()) {
+    getline(is, info);
+    cout << "info: " << info << endl;
+    nocommas = removeDelim(info, delim);
+    // debug
+    cout << "nocommas: " << nocommas << endl;
+    stringstream ss;
+    ss << nocommas;
+    ss >> tFN >> tD >> tDT >> tGN;
+    cout << "variables:\n";
+    cout << tFN << " " << tD << " " << tDT << " " << tGN << endl;
+    Flight temp = Flight(tFN, tD, tDT, tGN);
+    flights.push_back(temp);
+  }
+  
   return flights;
 }
 

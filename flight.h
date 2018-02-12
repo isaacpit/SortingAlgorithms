@@ -22,6 +22,8 @@ struct Flight
   //...
 };
 
+ostream& operator<<(ostream& os, const Flight& f);
+
 //compare this Flight object against another Flight object
 //returns true if this object is >= other
 bool compareToDestination(Flight f1, Flight f2);

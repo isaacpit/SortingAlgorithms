@@ -30,6 +30,15 @@ Flight::~Flight()
 {
 }
 
+ostream& operator<<(ostream& os, const Flight& f) {
+  os << "flight number: " << f.flightNum;
+  os << " destination: " << f.destination;
+  os << " departure time: " << f.departureTime;
+  os << " gateNum: " << f.gateNum;
+
+  return os;
+}
+
 bool compareToDestination(Flight f1, Flight f2)
 {
 
