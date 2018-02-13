@@ -18,13 +18,21 @@ using namespace std;
 int main()
 {
   Flight testFlight; 
-  string file = "ascen10.csv";
+  string file = "ascen10000.csv";
   vector<Flight> flights;
   flights = readFlights(file);
+
+  // debug code to verify that .csv's are read correctly
   cout << "read file..." << endl;
+  ofstream out;
+  string ofile = "output.txt";
+  out.open(ofile);
   for (int i = 0; i < flights.size(); ++i) {
-    cout << flights.at(i) << endl;
+    cout << "\ni: " << i  << "\nflight: " << flights.at(i) << endl;
+    out << flights.at(i) << endl;
   }
+
+
   /*
     first read flights in files using readFlights()
     descen10.csv	ascen10.csv     rand10.csv
@@ -66,23 +74,62 @@ int main()
   return 0;
 }
 
-string& removeDelim (string& str, char delim) {
-  for (int i = 0; i < str.length(); ++i) {
-    if (str.at(i) == delim) {
-      str.at(i) = ' ';
+// converts a stringstream to Flight class
+Flight& ssToFlight (stringstream& ss) {
+
+  bool first = 0; bool second = 0; bool third = 0; bool fourth = 0;
+  string s, tFN, tD, tDT, tGN = "";
+  int i = 0;
+
+  s = ss.str();
+  while (s.length() > 0) {
+    if (s.at(i) == ',' && first == false) {
+      tFN = s.substr(0, i);
+      // debug
+      // cout << "tFN:" << tFN << endl;
+      s = s.substr(i + 1,s.length());
+      i = 0;
+      first = true;
+    } 
+    else if (s.at(i) == ',' && second == false) {
+      tD = s.substr(0, i);
+
+      // debug
+      // cout << "tD:" << tD << endl;
+      s = s.substr(i + 1,s.length());
+      i = 0;
+      second = true;
+    }
+    else if (s.at(i) == ',' && third == false) {
+      tDT= s.substr(0, i);
+      // debug
+      // cout << "tDT:" << tDT << endl;
+      s = s.substr(i + 1,s.length());
+      i = 0;
+      third = true;
+    }
+    else if (i == s.length()-1 && fourth == false) {
+      tGN = s.substr(0, i);
+      // debug
+      // cout << "tGN:" << tGN << endl;
+      s = "";
+      i = 0;
+      Flight temp(tFN, tD, tDT, tGN);
+      // debug
+      // cout << "temp: " << temp << endl;
+      return temp;
     }
     else {
-      // do nothing
+      ++i;
     }
   }
-  return str;
 }
 
 
-//read in the flights from the input file at fileName and store them in a vector
+//read in the flights from the input file at fileName and 
+// store them in a vector
 std::vector<Flight> readFlights(std::string fileName)
 {
-  std::vector<Flight> flights;
   // reads file
   ifstream is;
   is.open(fileName);
@@ -94,34 +141,32 @@ std::vector<Flight> readFlights(std::string fileName)
   }
 
   // temporary variables
-  string tFN = "";
-  string tD = "";
-  string tDT = "";
-  string tGN = "";
-  string info = "";
-  string nocommas = "";
-  string header = "";
-
+  vector<Flight> flights;
+  string tFN, tD, tDT, tGN, info, nocommas, header = "";
   char delim = ',';
   getline (is, header);
-
+  int i = 4;
 
   // debug 
   cout << "header: " << header << endl;
 
+
   while (!is.eof()) {
-    getline(is, info);
-    cout << "info: " << info << endl;
-    nocommas = removeDelim(info, delim);
+    // first grab line up to new line character, then place into
+    // a string
+    getline(is, info, '\n');
     // debug
-    cout << "nocommas: " << nocommas << endl;
+    // cout << info << endl;
+    // place this string into a stringstream
     stringstream ss;
-    ss << nocommas;
-    ss >> tFN >> tD >> tDT >> tGN;
-    cout << "variables:\n";
-    cout << tFN << " " << tD << " " << tDT << " " << tGN << endl;
-    Flight temp = Flight(tFN, tD, tDT, tGN);
-    flights.push_back(temp);
+    ss << info;
+    // debug
+    // cout << ss.str() << endl;
+    // use ssToFlight to convert this stringstream to a 
+    // Flight instance
+    Flight tempFlight = ssToFlight(ss);
+    flights.push_back(tempFlight);
+    ss.clear();
   }
   
   return flights;

@@ -31,10 +31,15 @@ Flight::~Flight()
 }
 
 ostream& operator<<(ostream& os, const Flight& f) {
-  os << "flight number: " << f.flightNum;
-  os << " destination: " << f.destination;
-  os << " departure time: " << f.departureTime;
-  os << " gateNum: " << f.gateNum;
+  os << f.flightNum;
+  os.width(5);
+  os << " | ";
+  os.width(30);
+  os << f.destination << " | ";
+  os << f.departureTime;
+  os << " | ";
+  os << f.gateNum;
+
 
   return os;
 }
