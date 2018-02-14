@@ -18,23 +18,35 @@ using namespace std;
 int main()
 {
   Flight testFlight; 
-  string file = "rand100.csv";
+  string file = "rand10.csv";
   vector<Flight> flights;
   flights = readFlights(file);
 
   // debug code to verify that .csv's are read correctly
-  cout << "read file..." << endl;
-  ofstream out;
-  string ofile = "output.txt";
-  out.open(ofile);
-  for (int i = 0; i < flights.size(); ++i) {
-    cout << "\ni: " << i  << "\nflight: " << flights.at(i) << endl;
-    out << flights.at(i) << endl;
-  }
+  // cout << "\nread file successfully..." << endl;
+  // ofstream out;
+  // string ofile = "output.txt";
+  // out.open(ofile);
+  // cout << "\nvector flights contents:\n";
+  // for (int i = 0; i < flights.size(); ++i) {
+  //   cout << "\ni: " << i  << "\nflight: " << flights.at(i) << endl;
+  //   out << flights.at(i) << endl;
+  // }
+
+  // debug: selection sort by departure time 
+  cout << "Selection Sort: By Departure Time";
   SortOption s = ByDepartureTime;
-  vector<Flight> sorted = selection_sort(flights, s);
-  for (int i = 0; i < sorted.size(); ++i) {
-    cout <<sorted.at(i) << endl;
+  vector<Flight> sortedTime = selection_sort(flights, s);
+  for (int i = 0; i < sortedTime.size(); ++i) {
+    cout << "i: " << i << " " << sortedTime.at(i) << endl;
+  }
+
+  // debug: selection sort by departure time
+  cout << "SelectionSort: By Destination";
+  SortOption s2 = ByDestination;
+  vector<Flight> sortedDest = selection_sort(flights, s2);
+  for (int i = 0; i < sortedDest.size(); ++i) {
+    cout << "i: " << i << " " << sortedDest.at(i) << endl;
   }
 
   /*
@@ -138,41 +150,55 @@ std::vector<Flight> readFlights(std::string fileName)
   ifstream is;
   is.open(fileName);
   if (!is) {
-    cout << "could not read file\n";
+    // cout << "could not read file\n";
   }
   else {
-    cout << "reading file\n";
+    // cout << "reading file\n";
   }
 
   // temporary variables
   vector<Flight> flights;
-  string tFN, tD, tDT, tGN, info, nocommas, header = "";
+  string tFN = "", tD = "", tDT = "", tGN = "" , info = "", 
+    nocommas = "", header = "";
   char delim = ',';
   getline (is, header);
-  int i = 4;
 
   // debug 
-  cout << "header: " << header << endl;
+  // cout << "header: " << header << endl;
 
+  int i = 0;
 
+  // cout << "in readFlights() function:\n";
   while (!is.eof()) {
+
     // first grab line up to new line character, then place into
     // a string
     getline(is, info, '\n');
+
     // debug
     // cout << info << endl;
     // place this string into a stringstream
+
     stringstream ss;
     ss << info;
+
     // debug
     // cout << ss.str() << endl;
     // use ssToFlight to convert this stringstream to a 
     // Flight instance
+
     Flight tempFlight = ssToFlight(ss);
     flights.push_back(tempFlight);
     ss.clear();
+
+    // debug: 
+    // cout << "\ni: " << i << endl;
+    // cout << flights.at(i);
+    // ++i;
+
+
   }
-  
+  flights.erase(flights.end()-1);
   return flights;
 }
 
