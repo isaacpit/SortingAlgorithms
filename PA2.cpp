@@ -18,7 +18,7 @@ using namespace std;
 int main()
 {
   Flight testFlight; 
-  string file = "ascen10000.csv";
+  string file = "rand100.csv";
   vector<Flight> flights;
   flights = readFlights(file);
 
@@ -31,7 +31,11 @@ int main()
     cout << "\ni: " << i  << "\nflight: " << flights.at(i) << endl;
     out << flights.at(i) << endl;
   }
-
+  SortOption s = ByDepartureTime;
+  vector<Flight> sorted = selection_sort(flights, s);
+  for (int i = 0; i < sorted.size(); ++i) {
+    cout <<sorted.at(i) << endl;
+  }
 
   /*
     first read flights in files using readFlights()
