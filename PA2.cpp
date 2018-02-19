@@ -91,7 +91,7 @@ int main()
 }
 
 // converts a stringstream to Flight class
-Flight& ssToFlight (stringstream& ss) {
+Flight ssToFlight (stringstream& ss) {
 
   bool first = 0; bool second = 0; bool third = 0; bool fourth = 0;
   string s, tFN, tD, tDT, tGN = "";
@@ -139,6 +139,8 @@ Flight& ssToFlight (stringstream& ss) {
       ++i;
     }
   }
+  Flight Erroneous;
+  return Erroneous;
 }
 
 
