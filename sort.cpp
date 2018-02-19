@@ -97,6 +97,23 @@ std::vector<Flight> selection_sort(std::vector<Flight> flights,
 std::vector<Flight> insertion_sort(std::vector<Flight> flights,
 				   SortOption sortOpt)
 {
+  for(int i = 0; i < flights.size(); ++i){
+	  auto temp = flights.at(i);
+	  int j = i;
+	  if(sortOpt == ByDepartureTime){
+		  while(j > 0 && (num_cmps++, !compareToDepartureTime(temp, flights.at(j - 1)))){
+			  flights.at(j) = flights.at(j - 1);
+			  --j;
+		  }
+	  }
+	  else if(sortOpt == ByDestination){
+		  while(j > 0 && (num_cmps++, !compareToDestination(temp, flights.at(j - 1)))){
+			  flights.at(j) = flights.at(j - 1);
+			  --j;
+		  }
+	  }
+	  flights.at(j) = temp;
+  }
   return flights;
 }
 
