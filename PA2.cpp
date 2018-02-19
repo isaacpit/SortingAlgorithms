@@ -1,5 +1,7 @@
 /*
 	Isaac Pitblado
+  Carly Fohn
+  Shane Manley 
 	section 512
 	Programming Assignment 2
 	PA2.cpp
