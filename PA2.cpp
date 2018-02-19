@@ -1,8 +1,8 @@
 /*
-	name
-	section
-	assignment
-	file
+	Isaac Pitblado
+	section 512
+	Programming Assignment 2
+	PA2.cpp
 */
 
 
@@ -18,35 +18,48 @@ using namespace std;
 int main()
 {
   Flight testFlight; 
-  string file = "rand10.csv";
+  string file = "descen10.csv";
   vector<Flight> flights;
   flights = readFlights(file);
 
-  // debug code to verify that .csv's are read correctly
-  // cout << "\nread file successfully..." << endl;
-  // ofstream out;
-  // string ofile = "output.txt";
-  // out.open(ofile);
-  // cout << "\nvector flights contents:\n";
-  // for (int i = 0; i < flights.size(); ++i) {
-  //   cout << "\ni: " << i  << "\nflight: " << flights.at(i) << endl;
-  //   out << flights.at(i) << endl;
-  // }
 
-  // debug: selection sort by departure time 
-  cout << "Selection Sort: By Departure Time";
+  // debug: selection sort by departure time
+
+  cout << "reading from " << file << endl;
+  cout << "Selection Sort: By Departure Time\n";
   SortOption s = ByDepartureTime;
   vector<Flight> sortedTime = selection_sort(flights, s);
   for (int i = 0; i < sortedTime.size(); ++i) {
     cout << "i: " << i << " " << sortedTime.at(i) << endl;
   }
 
+  // writes a file if input size is less than 10
+  if (flights.size() <= 10) {
+    ofstream out;
+    string ofile = "SortedTime.txt";
+    out.open(ofile);
+    cout << "Wrote to file: " << ofile << endl << endl;
+    for (int i = 0; i < flights.size(); ++i) {
+    out << flights.at(i) << "\n";
+    }
+  }
+
+
   // debug: selection sort by departure time
-  cout << "SelectionSort: By Destination";
+  cout << "SelectionSort: By Destination\n";
   SortOption s2 = ByDestination;
   vector<Flight> sortedDest = selection_sort(flights, s2);
   for (int i = 0; i < sortedDest.size(); ++i) {
     cout << "i: " << i << " " << sortedDest.at(i) << endl;
+  }
+  if (flights.size() <= 10) {
+    ofstream out;
+    string ofile = "SortedDest.txt";
+    out.open(ofile);
+    cout << "Wrote to file: " << ofile << endl;
+    for (int i = 0; i < flights.size(); ++i) {
+    out << flights.at(i) << endl;
+    }
   }
 
   /*
@@ -91,7 +104,7 @@ int main()
 }
 
 // converts a stringstream to Flight class
-Flight& ssToFlight (stringstream& ss) {
+Flight ssToFlight (stringstream& ss) {
 
   bool first = 0; bool second = 0; bool third = 0; bool fourth = 0;
   string s, tFN, tD, tDT, tGN = "";
@@ -139,6 +152,8 @@ Flight& ssToFlight (stringstream& ss) {
       ++i;
     }
   }
+  Flight Erroneous;
+  return Erroneous;
 }
 
 

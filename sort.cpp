@@ -1,8 +1,10 @@
 /*
-name
-section
-assignment
-file
+	Isaac Pitblado
+  Carly Fohn
+  Shane Manley 
+	section 512
+	Programming Assignment 2
+	PA2.cpp
 */
 
 #include "sort.h"
@@ -90,7 +92,9 @@ std::vector<Flight> selection_sort(std::vector<Flight> flights,
     }
   }
 
-  cout << endl;
+  // cout << endl;
+  cout << "comparisons done: " << num_cmps << endl;
+  num_cmps = 0;
   return flights;
 }
 
