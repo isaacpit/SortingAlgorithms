@@ -33,7 +33,7 @@ int main()
   //   out << flights.at(i) << endl;
   // }
 
-  // debug: selection sort by departure time 
+/*  // debug: selection sort by departure time 
   cout << "Selection Sort: By Departure Time";
   SortOption s = ByDepartureTime;
   vector<Flight> sortedTime = selection_sort(flights, s);
@@ -45,6 +45,22 @@ int main()
   cout << "SelectionSort: By Destination";
   SortOption s2 = ByDestination;
   vector<Flight> sortedDest = selection_sort(flights, s2);
+  for (int i = 0; i < sortedDest.size(); ++i) {
+    cout << "i: " << i << " " << sortedDest.at(i) << endl;
+  }
+*/  
+  // debug: insertion sort by departure time 
+  cout << "Insertion Sort: By Departure Time";
+  SortOption s = ByDepartureTime;
+  vector<Flight> sortedTime = insertion_sort(flights, s);
+  for (int i = 0; i < sortedTime.size(); ++i) {
+    cout << "i: " << i << " " << sortedTime.at(i) << endl;
+  }
+
+  // debug: insertion sort by departure time
+  cout << "InsertionSort: By Destination";
+  SortOption s2 = ByDestination;
+  vector<Flight> sortedDest = insertion_sort(flights, s2);
   for (int i = 0; i < sortedDest.size(); ++i) {
     cout << "i: " << i << " " << sortedDest.at(i) << endl;
   }
