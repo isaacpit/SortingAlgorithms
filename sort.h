@@ -1,8 +1,8 @@
 /*
-name
-section
-assignment
-file
+	Isaac Pitblado
+	section 512
+	Programming Assignment 2
+	PA2.cpp
 */
 
 #pragma once
