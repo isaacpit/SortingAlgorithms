@@ -22,11 +22,27 @@ int main()
   vector<Flight> flights;
   flights = readFlights(file);
 
+<<<<<<< HEAD
 
   // debug: selection sort by departure time
 
   cout << "reading from " << file << endl;
   cout << "Selection Sort: By Departure Time\n";
+=======
+  // debug code to verify that .csv's are read correctly
+  // cout << "\nread file successfully..." << endl;
+  // ofstream out;
+  // string ofile = "output.txt";
+  // out.open(ofile);
+  // cout << "\nvector flights contents:\n";
+  // for (int i = 0; i < flights.size(); ++i) {
+  //   cout << "\ni: " << i  << "\nflight: " << flights.at(i) << endl;
+  //   out << flights.at(i) << endl;
+  // }
+
+/*  // debug: selection sort by departure time 
+  cout << "Selection Sort: By Departure Time";
+>>>>>>> bc60670c9856f9124e6caeedc47e3e2bb2970c65
   SortOption s = ByDepartureTime;
   vector<Flight> sortedTime = selection_sort(flights, s);
   for (int i = 0; i < sortedTime.size(); ++i) {
@@ -52,6 +68,7 @@ int main()
   for (int i = 0; i < sortedDest.size(); ++i) {
     cout << "i: " << i << " " << sortedDest.at(i) << endl;
   }
+<<<<<<< HEAD
   if (flights.size() <= 10) {
     ofstream out;
     string ofile = "SortedDest.txt";
@@ -60,6 +77,23 @@ int main()
     for (int i = 0; i < flights.size(); ++i) {
     out << flights.at(i) << endl;
     }
+=======
+*/  
+  // debug: insertion sort by departure time 
+  cout << "Insertion Sort: By Departure Time";
+  SortOption s = ByDepartureTime;
+  vector<Flight> sortedTime = insertion_sort(flights, s);
+  for (int i = 0; i < sortedTime.size(); ++i) {
+    cout << "i: " << i << " " << sortedTime.at(i) << endl;
+  }
+
+  // debug: insertion sort by departure time
+  cout << "InsertionSort: By Destination";
+  SortOption s2 = ByDestination;
+  vector<Flight> sortedDest = insertion_sort(flights, s2);
+  for (int i = 0; i < sortedDest.size(); ++i) {
+    cout << "i: " << i << " " << sortedDest.at(i) << endl;
+>>>>>>> bc60670c9856f9124e6caeedc47e3e2bb2970c65
   }
 
   /*
