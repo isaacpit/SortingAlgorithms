@@ -90,7 +90,7 @@ std::vector<Flight> selection_sort(std::vector<Flight> flights,
     }
   }
 
-  cout << endl;
+  // cout << endl;
   return flights;
 }
 
