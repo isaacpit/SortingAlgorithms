@@ -1,6 +1,5 @@
 *.o 
 PA2
-*.csv
 *.txt
 .DS_Store
 
